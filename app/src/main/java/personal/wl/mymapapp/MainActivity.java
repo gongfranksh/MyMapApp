@@ -3,6 +3,7 @@ package personal.wl.mymapapp;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFirstLoc = true;
     private String TAG = "BAIDU";
     private final int REQUEST_CODE = 1;
+    private Intent intent;
     private Context context;
 
     @Override
@@ -61,6 +65,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(1,1,1,"连线地图定位");
+        menu.add(1,2,2,"离线地图定位");
+        menu.add(1,3,3,"室内定位");
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                Toast.makeText(context, "地图定位 ", Toast.LENGTH_LONG).show();
+                break;
+            case 2:
+                intent = new Intent();
+                intent.setClass(MainActivity.this,offline.class);
+                startActivity(intent);
+                Toast.makeText(context, "离线定位 ", Toast.LENGTH_LONG).show();
+                break;
+            case 3:
+                intent = new Intent();
+                intent.setClass(MainActivity.this,Building.class);
+                startActivity(intent);
+                Toast.makeText(context, "室内定位 ", Toast.LENGTH_LONG).show();
+                break;
+            default:
+                break;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -85,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
         }
 
-        this.context=MainActivity.this;
+        this.context = MainActivity.this;
     }
 
     private void initView() {
@@ -195,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
             }
             Log.d(TAG, "SUCCESS: ");
-            Log.i(TAG, "城市代码--->"+
+            Log.i(TAG, "城市代码--->" +
                     location.getCityCode() + "\t经度--->" +
                     location.getLatitude() + "\t纬度-->" +
                     location.getLongitude() + "\t使用的定位类型-->" +
@@ -203,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                     location.getCountry() + "\t城市-->" +
                     location.getCity() + "\t地址-->" +
                     location.getAddrStr());
-            Toast.makeText(context,location.getLocationDescribe(),Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, location.getLocationDescribe(), Toast.LENGTH_LONG).show();
         }
 
     }

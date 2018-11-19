@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".offline">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/ic_launcher_foreground">
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:paddingRight="8.0dip"
+            android:background="@drawable/ic_launcher_foreground"
+            android:contentDescription="@string/back" />
+        <LinearLayout
+            android:id="@+id/city_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:padding="1dp"
+            android:background="@drawable/ic_launcher_foreground">
+        </LinearLayout>
+        <Button
+            android:id="@+id/clButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="城市列表"
+            android:textColor="#4196fd"
+            android:background="@drawable/ic_launcher_background"/>
+            <!--android:onClick="clickCityListButton"-->
+
+        <Button
+            android:id="@+id/localButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="下载管理"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/ic_launcher_background"/>
+    </RelativeLayout>
+
+            <!--android:onClick="clickLocalMapListButton"-->
+
+</android.support.constraint.ConstraintLayout>
